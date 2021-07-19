@@ -1,0 +1,22 @@
+﻿.container {
+    width: 80%;
+}
+
+.list-group {
+    width: 70%;
+}
+
+.btn-p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-nom {
+    font-size: 27px;
+}
+
+.btn-d {
+    background: #ffc0c0;
+    color: rgba(0, 0, 0, 0.7);
+    float: right;
+}

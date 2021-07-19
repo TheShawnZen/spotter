@@ -1,0 +1,56 @@
+﻿@{
+	ViewBag.Title = "GererParticipantsGet";
+}
+@Styles.Render("~/css/gerer-participants.css")
+@using Spotter.Modele
+@using Spotter.Services
+@{
+	Activite activite = ((Activite)ViewBag.Activite);
+	List<Participant> participants = (List<Participant>)ViewBag.Participants;
+
+	if (ViewBag.Erreur != "aucune")
+	{
+		<div align="center">
+			<h2 style="color:red">@ViewBag.Erreur</h2>
+		</div>
+	}
+	else if (activite == null)
+	{
+		<div align="center">
+			<h2 style="color:red">L'activité est nulle</h2>
+		</div>
+	}
+	else
+	{
+		<div class="container">
+			<h2>
+				Gestion de participants pour l'activité
+				<em>@activite.Nom</em>
+			</h2>
+            <div align="center">
+                <div class="list-group">
+                    @{
+                        if (participants.Count == 0)
+                        {
+                            <div type="button" class="list-group-item list-group-item-action">Aucun participant</div>
+                        }
+                        else
+                        {
+                            foreach (Participant p in ParticipantServices.GetByActiviteId(activite.Id)) //ViewBag.Participants)
+                            {
+                                <div type="button" class="btn-p list-group-item list-group-item-action">
+                                    <div class="p-nom">
+                                        <strong>@((MembreServices.GetById(p.Membre_id)).Username)</strong>
+                                    </div>
+                                    <div>
+                                        <a href="Desinscription?idmem=@p.Membre_id&idact=@(activite.Id)" class="btn-d btn-lg">Désinscrire</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+		</div>
+	}
+}

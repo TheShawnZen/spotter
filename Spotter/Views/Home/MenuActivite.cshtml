@@ -1,0 +1,805 @@
+﻿@model Spotter.Modele.Activite
+@using Spotter.Modele;
+@using Spotter.Services;
+@{
+    ViewBag.Title = "MenuActivite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/ActiviteCard_style.css")
+@Styles.Render("~/css/rejoindre-activite.css")
+@Styles.Render("~/css/modalParcourir_style.css")
+
+@{
+    if (ViewBag.Erreur != "aucune")
+    {
+        <div align="center">
+            <h2 style="color:red">@ViewBag.Erreur</h2>
+        </div>
+    }
+}
+
+<section id="ListActivite">
+    @if (ViewBag.activites == null)
+    {
+        <div class="container my-3 py-5 text-center">
+            <div class="container my-3 py-5 text-center">
+                <div class="row mb-5">
+                    <div class="col">
+                        <h1>Aucune Activité</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container my-3 py-5 text-center">
+            <div class="row mb-5">
+                <div class="col">
+                    <h1>Activités</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                @if ((Membre)HttpContext.Current.Session["utilisateur"] != null)
+                {
+                    foreach (Activite act in ViewBag.activites)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            @{Participant participant = ParticipantServices.GetByActiviteMembreId(act.Id, (((Membre)HttpContext.Current.Session["utilisateur"]).Id));}
+                            @if (participant != null)
+                            {
+                                <div class="card card_active">
+                                    <div class="card-body">
+
+                                        @if (act.Categorie_id == 1)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-gamepad fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 2)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-shoe-prints fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 3)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-music fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 4)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-utensils fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 5)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-futbol fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 6)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-skiing fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+
+                                        }
+                                        else if (act.Categorie_id == 7)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-swimmer fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 8)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-book-reader fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 9)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-plane fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 10)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-film fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 11)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-running fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 12)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-cocktail fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 13)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-hiking fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        <h3>@act.Nom</h3>
+                                        <p>@act.Lieu</p>
+                                        <p>@((act.Dateheure).Split(' ')[0])</p>
+                                        <p>@((act.Dateheure).Split(' ')[1].Substring(0, 5))</p>
+                                        <div class="d-flex flex-row justify-content-around">
+                                            <div class="p-4">
+                                                <a href="#" data-toggle="modal" data-target="#@act.Id">
+                                                    <i class="fas fa-ellipsis-h fa-5x border-icon"></i>
+                                                    <span class="tooltiptext">Voir plus d'informations</span>
+                                                </a>
+
+                                                <a href="AnnulerParticiper?id=@participant.Id" class="btn_participer">
+                                                    <i class="fas fa-minus fa-5x border-icon"></i>
+                                                    <span class="tooltiptext">Ne plus Participer</span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if (act.Categorie_id == 1)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-gamepad fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 2)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-shoe-prints fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 3)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-music fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 4)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-utensils fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 5)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-futbol fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 6)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-skiing fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+
+                                        }
+                                        else if (act.Categorie_id == 7)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-swimmer fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 8)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-book-reader fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 9)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-plane fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 10)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-film fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 11)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-running fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 12)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-cocktail fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        else if (act.Categorie_id == 13)
+                                        {
+                                            <a href="" class="categorie-icon">
+                                                <i class="fas fa-hiking fa-5x default"></i>
+                                                <i class="fas fa-smile-beam fa-5x smile"></i>
+                                            </a>
+                                        }
+                                        <h3>@act.Nom</h3>
+                                        <p>@act.Lieu</p>
+                                        <p>@((act.Dateheure).Split(' ')[0])</p>
+                                        <p>@((act.Dateheure).Split(' ')[1].Substring(0, 5))</p>
+                                        <div class="d-flex flex-row justify-content-around">
+
+
+                                            <div class="p-4">
+                                                <a href="#" data-toggle="modal" data-target="#@act.Id">
+                                                    <i class="fas fa-ellipsis-h fa-5x border-icon"></i>
+                                                    <span class="tooltiptext">Voir plus d'informations</span>
+                                                </a>
+                                                <a href="Participer?id=@act.Id">
+                                                    <i class="fas fa-plus fa-5x border-icon"></i>
+                                                    <span class="tooltiptext">Participer</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div id="@act.Id" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" style="color:#fff;">&times;</button>
+                                        <h2 class="modal-title" style="text-align-last: center">@act.Nom</h2>
+                                        <div class="organisateur" style="text-align:left">
+                                            Organisé par: @MembreServices.GetById(act.Membre_id).Username
+                                        </div>
+                                    </div>
+                                    <div class="modal-body" style="max-height:280px;overflow-y:scroll;">
+                                        <h4 class="modal-body-title" style="text-align-last: center">Description</h4>
+                                        <div class="description form-group">
+                                            @act.Dsc
+                                        </div>
+                                        <div class="lieu form-group" style="text-align:left">
+                                            Lieu: @act.Lieu
+                                        </div>
+                                        <div class="date form-group" style="text-align:left">
+                                            Date: @((act.Dateheure).Split(' ')[0])
+                                        </div>
+                                        <div class="Heure form-group" style="text-align:left">
+                                            Heure: @((act.Dateheure).Split(' ')[1].Substring(0, 5))
+                                        </div>
+                                        <h4><i class="fas fa-users" style="color:#ffc0c0"></i> Participants</h4>
+                                        <div class="Liste-participant">
+                                            <ul class="list-group">
+
+                                                @if (ParticipantServices.GetByActiviteId(act.Id).Count == 0)
+                                                {
+                                                    <li class="list-group-item">Aucun participant</li>
+                                                }
+                                                else
+                                                {
+                                                    foreach (Participant part in ParticipantServices.GetByActiviteId(act.Id))
+                                                    {
+                                                        <li class="list-group-item">@MembreServices.GetById(part.Membre_id).Username</li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @if (((Membre)HttpContext.Current.Session["utilisateur"]) != null)
+                                    {
+                                        <div class="modal-footer">
+
+                                            @if (participant != null)
+                                            {
+                                                <a href="AnnulerParticiper?id=@participant.Id">Annuler ma participation</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="Participer?id=@act.Id">Participer à l'activité</a>
+                                            }
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="rejoindreActivite" role="dialog" data-modal-type="type1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Rejoindre une activité</h4>
+                                    </div>
+                                    @using (Html.BeginForm("RejoindreActivite", "Home", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div class="modal-body" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="page">Page</label>
+                                                <input type="text" name="page" value="MenuActivite" />
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="codeA" class="form-group">
+                                                @Html.LabelFor(a => a.Motdepasse)
+                                                @Html.EditorFor(a => a.Motdepasse, new { htmlAttributes = new { @class = "form-control", @placeholder = "Code d'accès" } })
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn bouton btn-md btn-block">Rejoindre</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    foreach (Activite act in ViewBag.activites)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    @if (act.Categorie_id == 1)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-gamepad fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 2)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-shoe-prints fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 3)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-music fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 4)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-utensils fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 5)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-futbol fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 6)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-skiing fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+
+                                    }
+                                    else if (act.Categorie_id == 7)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-swimmer fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 8)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-book-reader fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 9)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-plane fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 10)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-film fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 11)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-running fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 12)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-cocktail fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    else if (act.Categorie_id == 13)
+                                    {
+                                        <a href="" class="categorie-icon">
+                                            <i class="fas fa-hiking fa-5x default"></i>
+                                            <i class="fas fa-smile-beam fa-5x smile"></i>
+                                        </a>
+                                    }
+                                    <h3>@act.Nom</h3>
+                                    <p>@act.Lieu</p>
+                                    <p>@((act.Dateheure).Split(' ')[0])</p>
+                                    <p>@((act.Dateheure).Split(' ')[1].Substring(0, 5))</p>
+                                    <div class="d-flex flex-row justify-content-around">
+                                        <div class="p-4">
+                                            <a href="#" data-toggle="modal" data-target="#@act.Id">
+                                                <i class="fas fa-ellipsis-h fa-5x border-icon"></i>
+                                                <span class="tooltiptext">Voir plus d'informations</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="@act.Id" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" style="color:#fff;">&times;</button>
+                                        <h2 class="modal-title" style="text-align-last: center">@act.Nom</h2>
+                                        <div class="organisateur" style="text-align:left">
+                                            Organisé par: @MembreServices.GetById(act.Membre_id).Username
+                                        </div>
+                                    </div>
+                                    <div class="modal-body" style="max-height:280px;overflow-y:scroll;">
+                                        <h4 class="modal-body-title" style="text-align-last: center">Description</h4>
+                                        <div class="description form-group">
+                                            @act.Dsc
+                                        </div>
+                                        <div class="lieu form-group" style="text-align:left">
+                                            Lieu: @act.Lieu
+                                        </div>
+                                        <div class="date form-group" style="text-align:left">
+                                            Date: @((act.Dateheure).Split(' ')[0])
+                                        </div>
+                                        <div class="Heure form-group" style="text-align:left">
+                                            Heure: @((act.Dateheure).Split(' ')[1].Substring(0, 5))
+                                        </div>
+                                        <h4><i class="fas fa-users" style="color:#ffc0c0"></i> Participants</h4>
+                                        <div class="Liste-participant">
+                                            <ul class="list-group">
+
+                                                @if (ParticipantServices.GetByActiviteId(act.Id).Count == 0)
+                                                {
+                                                    <li class="list-group-item">Aucun participant</li>
+                                                }
+                                                else
+                                                {
+                                                    foreach (Participant part in ParticipantServices.GetByActiviteId(act.Id))
+                                                    {
+                                                        <li class="list-group-item">@MembreServices.GetById(part.Membre_id).Username</li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                }
+            </div>
+        </div>
+    }
+    }
+</section>
+@if (Session["categorie_Id"] == null)
+{
+    <div class="btn_categories btn_active">
+        Catégories
+    </div>
+}
+else
+{
+    <a href="@Url.Action("MenuAllActivite", "Home")">
+        <div class="btn_categories btn_close btn_active" style="cursor: pointer; font-size:2vh">
+            <i class="fas fa-times-circle fa-1x" style="color:black"></i>
+        </div>
+    </a>
+}
+
+
+<div class="categories">
+
+    @foreach (Categorie cat in CategorieServices.GetAll())
+    {
+        if (cat.Id == 1)
+        {
+            if ((string)Session["categorie_Id"] == "1")
+            {
+                <a href="MenuTrierActivite?id=1" class="categorie categorie_active">
+                    <p>Jeux Vidéo</p>
+                    <i class="fas fa-gamepad"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=1" class="categorie">
+                    <p>Jeux Vidéo</p>
+                    <i class="fas fa-gamepad"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 2)
+        {
+            if ((string)Session["categorie_Id"] == "2")
+            {
+                <a href="MenuTrierActivite?id=2" class="categorie categorie_active">
+                    <p>Danse</p>
+                    <i class="fas fa-shoe-prints"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=2" class="categorie">
+                    <p>Danse</p>
+                    <i class="fas fa-shoe-prints"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 3)
+        {
+            if ((string)Session["categorie_Id"] == "3")
+            {
+                <a href="MenuTrierActivite?id=3" class="categorie categorie_active">
+                    <p>Musique</p>
+                    <i class="fas fa-music"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=3" class="categorie">
+                    <p>Musique</p>
+                    <i class="fas fa-music"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 4)
+        {
+            if ((string)Session["categorie_Id"] == "4")
+            {
+                <a href="MenuTrierActivite?id=4" class="categorie categorie_active">
+                    <p>Cuisine</p>
+                    <i class="fas fa-utensils"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=4" class="categorie">
+                    <p>Cuisine</p>
+                    <i class="fas fa-utensils"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 5)
+        {
+            if ((string)Session["categorie_Id"] == "5")
+            {
+                <a href="MenuTrierActivite?id=5" class="categorie categorie_active">
+                    <p>Sport</p>
+                    <i class="fas fa-futbol"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=5" class="categorie">
+                    <p>Sport</p>
+                    <i class="fas fa-futbol"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 6)
+        {
+            if ((string)Session["categorie_Id"] == "6")
+            {
+                <a href="MenuTrierActivite?id=6" class="categorie categorie_active">
+                    <p> Sport d hiver</p>
+                    <i class="fas fa-skiing"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=6" class="categorie">
+                    <p> Sport d hiver</p>
+                    <i class="fas fa-skiing"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 7)
+        {
+            if ((string)Session["categorie_Id"] == "7")
+            {
+                <a href="MenuTrierActivite?id=7" class="categorie categorie_active">
+                    <p> Sport aquatique</p>
+                    <i class="fas fa-swimmer"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=7" class="categorie">
+                    <p> Sport aquatique</p>
+                    <i class="fas fa-swimmer"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 8)
+        {
+            if ((string)Session["categorie_Id"] == "8")
+            {
+                <a href="MenuTrierActivite?id=8" class="categorie categorie_active">
+                    <p> Lecture </p>
+                    <i class="fas fa-book-reader"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=8" class="categorie">
+                    <p> Lecture </p>
+                    <i class="fas fa-book-reader"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 9)
+        {
+            if ((string)Session["categorie_Id"] == "9")
+            {
+                <a href="MenuTrierActivite?id=9" class="categorie categorie_active">
+                    <p> Voyage </p>
+                    <i class="fas fa-plane"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=9" class="categorie">
+                    <p> Voyage </p>
+                    <i class="fas fa-plane"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 10)
+        {
+            if ((string)Session["categorie_Id"] == "10")
+            {
+                <a href="MenuTrierActivite?id=10" class="categorie categorie_active">
+                    <p> Film </p>
+                    <i class="fas fa-film"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=10" class="categorie">
+                    <p> Film </p>
+                    <i class="fas fa-film"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 11)
+        {
+            if ((string)Session["categorie_Id"] == "11")
+            {
+                <a href="MenuTrierActivite?id=11" class="categorie categorie_active">
+                    <p> Course </p>
+                    <i class="fas fa-running"></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=11" class="categorie">
+                    <p> Course </p>
+                    <i class="fas fa-running"></i>
+                </a>
+            }
+        }
+        else if (cat.Id == 12)
+        {
+            if ((string)Session["categorie_Id"] == "12")
+            {
+                <a href="MenuTrierActivite?id=12" class="categorie categorie_active">
+                    <p> Fête </p>
+                    <i class="fas fa-cocktail "></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=12" class="categorie">
+                    <p> Fête </p>
+                    <i class="fas fa-cocktail "></i>
+                </a>
+            }
+        }
+
+
+        else if (cat.Id == 13)
+        {
+            if ((string)Session["categorie_Id"] == "13")
+            {
+                <a href="MenuTrierActivite?id=13" class="categorie categorie_active">
+                    <p> Randonnée </p>
+                    <i class="fas fa-hiking "></i>
+                </a>
+            }
+            else
+            {
+                <a href="MenuTrierActivite?id=13" class="categorie">
+                    <p> Randonnée </p>
+                    <i class="fas fa-hiking "></i>
+                </a>
+            }
+        }
+    }
+</div>
+@if ((Membre)HttpContext.Current.Session["utilisateur"] != null)
+{
+    <div class="rejoindreActivite">
+        <a href="#" class="btn-md" data-toggle="modal" data-target="#rejoindreActivite">
+            <i class="fas fa-plus-square"></i>
+            <div id="rejA">Rejoindre une activité privée</div>
+        </a>
+    </div>
+}

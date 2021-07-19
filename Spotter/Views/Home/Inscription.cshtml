@@ -1,0 +1,45 @@
+﻿@model Spotter.Modele.Membre
+@{
+    ViewBag.Title = "Inscription";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/css/inscription_style.css")
+
+@if (ViewBag.Erreur != "aucune")
+{
+    <div align="center">
+        <h2 style="color:red">@ViewBag.Erreur</h2>
+    </div>
+}
+
+<div class="signup-form">
+    @using (Html.BeginForm("Inscription", "Home/Signup", FormMethod.Post))
+    {
+        <h2>Inscription</h2>
+        @Html.AntiForgeryToken()
+        <p class="hint-text">Inscrivez-vous. C'est gratuit.</p>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @required = true } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Username)
+            @Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control", @required = true } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Motdepasse)
+            <input class="form-control" type="password" name="Motdepasse" />
+        </div>
+        <div class="form-group">
+            <label>Confirmation</label>
+            <input type="password" class="form-control" name="confirmation" id="confirm" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">S'inscrire</button>
+        </div>
+    }
+    <div class="text-center">Vous avez déjà un compte? @Html.ActionLink("Se connecter", "Connexion")</div>
+</div>
+
+

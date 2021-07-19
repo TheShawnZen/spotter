@@ -1,0 +1,101 @@
+﻿@model Spotter.Modele.Activite
+@{
+    ViewBag.Title = "ModifierActiviteGet";
+}
+@using Spotter.Modele;
+@using Spotter.Services;
+
+@Styles.Render("~/css/time-pick-dark.css")
+@Styles.Render("~/css/modifier-activite.css")
+<script type="text/javascript" src="@Url.Content("~/js/time-pick.js")"></script>
+
+@if (ViewBag.Erreur != "aucune")
+{
+    <div align="center">
+        <h2 style="color:red">@ViewBag.Erreur</h2>
+    </div>
+}
+else
+{
+    Activite activite = ((Activite)ViewBag.Activite);
+    <h2 align="center">
+        Modification de l'activité
+        <em>@(activite.Nom)</em>
+    </h2>
+    <div class="signup-form">
+        @{List<Categorie> listeCat = CategorieServices.GetAll();}
+
+        @using (Html.BeginForm("Modifier activité", "Home/ModifierActivitePost", FormMethod.Post))
+        {
+            <p style="font-size: 20px;" class="hint-text">Modifiez cette activité</p>
+            @Html.AntiForgeryToken()
+            <div class="form-group" style="display: none;">
+                @Html.LabelFor(a => a.Id)
+                @Html.EditorFor(a => a.Id, new { htmlAttributes = new { @class = "form-control", @required = true, Value = activite.Id } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Nom)
+                @Html.EditorFor(a => a.Nom, new { htmlAttributes = new { @class = "form-control", @required = true, Value = activite.Nom } })
+            </div>
+            <div class="form-group">
+                <select name="categorieid" class="form-control" id="categorieid">
+                    @{
+                        foreach (Categorie cat in listeCat)
+                        {
+                            if (cat.Nom == activite.Nom)
+                            {
+                                <option selected value="@cat.Id">@cat.Nom</option>
+                            }
+                            if (cat.Nom != activite.Nom)
+                            {
+                                <option value="@cat.Id">@cat.Nom</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="@((activite.Dateheure).Split(' ')[0])" />
+            </div>
+            <div class="form-group">
+                <label for="heure">Heure: </label>
+                <input type="text" class="form-control" id="heure" name="heure" placeholder="Heure:Minute" value="@((activite.Dateheure).Split(' ')[1].Substring(0, 5))" />
+                <div id="temps"></div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Lieu)
+                @Html.EditorFor(a => a.Lieu, new { htmlAttributes = new { @class = "form-control", @required = true, Value = activite.Lieu } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Dsc)
+                @Html.EditorFor(a => a.Dsc, new { htmlAttributes = new { @class = "form-control", @required = true, Value = activite.Dsc } })
+            </div>
+            <div class="form-group">
+                <div>@Html.LabelFor(a => a.Motdepasse)</div>
+                <div style="display: ruby;">
+                    @Html.EditorFor(a => a.Motdepasse, new { htmlAttributes = new { @class = "form-control", Value = activite.Motdepasse } })
+                    <a href="" onclick="copie('@(activite.Motdepasse)')" type="button" class="btn-lg bouton"><i style="background:#ffc0c0; color:rgba(0, 0, 0, 0.7);" class="fas fa-clipboard"></i></a>
+                </div>
+                <br /><em style="font-size: 10px;">Pour rendre cette activité publique, supprimez le code d'accès.</em>
+            </div>
+            <div class="form-group">
+                <input type="submit" style="background:#ffc0c0; color:rgba(0, 0, 0, 0.7);" class="btn btn-succes btn-lg btn-block" id="btnSubmit" value="Modifier" />
+            </div>
+        }
+    </div>
+    <script>
+        window.addEventListener("load", function () {
+            tp.attach({
+                target: "heure",
+                wrap: "temps"
+            });
+        });
+        const copie = (texte => {
+            navigator.clipboard.writeText(texte).then(function () {
+                console.log('Copié avec succès!');
+            }, function (err) {
+                console.error('Erreur en copiant: ', err);
+            });
+        });
+    </script>
+}

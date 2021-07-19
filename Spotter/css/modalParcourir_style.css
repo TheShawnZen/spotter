@@ -1,0 +1,49 @@
+﻿.modal-header{
+    background:#2d2d2d;
+}
+.modal-header h2{
+    color:#fff;
+    font-weight:bold;
+}
+.modal-body h4{
+    font-weight:bold;
+    color:black;
+}
+
+.organisateur {
+    font-weight: normal;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.description {
+    font-weight: normal;
+}
+
+.form-group{
+    font-weight:normal;
+}
+.modal-footer{
+    position:relative;
+}
+.modal-footer a {
+    background-color: #2d2d2d;
+    color: #ffc0c0;
+    padding: 1em 1.5em;
+    position: absolute;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 10px;
+    left:50%;
+    transform:translate(-50%,-50%);
+    top:50%;
+}
+
+    .modal-footer a:hover {
+        background-color: #808080;
+    }
+
+    .modal-footer a:active {
+        box-shadow: none;
+        top: 5px;
+    }

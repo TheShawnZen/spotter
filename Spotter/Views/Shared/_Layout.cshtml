@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/css/nav_style.css")
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        footer {
+            display: block;
+            bottom: 0;
+            width: 100%;
+            height: 10vh;
+            text-align: center;
+        }
+    </style>
+    @Scripts.Render("~/bundles/modernizr")
+    @using Spotter.Modele
+</head>
+<body>
+    @if (Session["utilisateur"] == null)
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Spotter", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Se connecter", "Index", "Home")</li>
+                        <li>@Html.ActionLink("S'inscrire", "Inscription", "Home")</li>
+                        <li>
+                            <a href="@Url.Action("MenuAllActivite", "Home")">
+                                <i class="fas fa-search"></i>
+                                <span>
+                                    <strong>Parcourir</strong>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Spotter", "MenuAllActivite", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li>
+                            <a href="@Url.Action("MenuAllActivite", "Home")">
+                                <i class="fas fa-search"></i>
+                                <span>
+                                    <strong>Parcourir</strong>
+                                </span>
+                            </a>
+                        </li>
+                        <li><a href="@Url.Action("GererActivites", "Home")">
+                            <i class="fas fa-bicycle"></i>
+                            <span>
+                                <strong>Mes activités</strong>
+                            </span>
+                        </a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"></i>
+                                <span>
+                                    <strong>@(((Membre)Session["utilisateur"]).Username)</strong>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                @Html.ActionLink("Se déconnecter", "Logout", "Home", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>@DateTime.Now.Year - © Spotter</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

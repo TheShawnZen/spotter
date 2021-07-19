@@ -1,0 +1,342 @@
+﻿* {
+    transition: 0.5s;
+}
+
+margin {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 36px;
+    color: #555;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.categorie-icon i {
+    font-size: 30px;
+    color: #555;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.categorie-icon {
+    display: block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #ffc0c0;
+    overflow: hidden;
+}
+
+
+
+.border-icon {
+    padding: 5px;
+    border-radius: 50%;
+    border: solid #555;
+}
+
+.p-4 i {
+    font-size: 20px;
+    color: #555;
+}
+
+.p-4 a {
+    position: relative;
+}
+
+.p-4 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#ListActivite p {
+    font-weight: 500;
+}
+
+#ListActivite .card {
+    margin: 30px;
+    border-radius: 0;
+    max-width: 300px;
+    box-shadow: 5px 5px 15px #808080;
+    height: 300px;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 80px;
+    }
+}
+
+#ListActivite .card:hover {
+    background: #808080;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 5px 5px 10px #808080;
+}
+
+    #ListActivite .card:hover h3, #ListActivite .card:hover i {
+        color: #fff;
+    }
+
+    #ListActivite .card:hover .border-icon {
+        border: solid #fff;
+    }
+
+.p-4 .tooltiptext {
+    display: none;
+    width: 180px;
+    background-color: black;
+    color: rgb(226,226,226);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 1;
+}
+
+.p-4 a:hover .tooltiptext {
+    display: block;
+    position: absolute;
+}
+
+
+.btn_categories {
+    display: block;
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    padding: 2vh;
+    background: pink;
+    font-weight: bold;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    transform: translateX(-100%);
+}
+
+.btn_active {
+    animation: show 0.5s ease forwards;
+}
+
+@keyframes show {
+    0% {
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes hide {
+    0% {
+    }
+
+    100% {
+        transform: translateX(-100%)
+    }
+}
+
+.btn_categories:hover {
+    color: white;
+}
+
+.btn_active {
+}
+
+.categories {
+    display: flex;
+    position: fixed;
+    top: 18vh;
+    left: 0;
+    height: 80vh;
+    width: 22vh;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-flow: column;
+}
+
+
+
+    .categories a i {
+        font-size: 3vh;
+        width: 4vh;
+        height: 4vh;
+        color: black;
+        border-radius: 50%;
+        line-height: 4vh;
+        text-align: center;
+        vertical-align: middle;
+        position: absolute;
+        right: 0.5vh;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .categories a {
+        height: 5vh;
+        padding: 2px;
+        position: relative;
+        background: pink;
+        border-bottom-right-radius: 25px;
+        border-top-right-radius: 25px;
+        border: solid black 2px;
+        transform: translateX(-75%);
+    }
+
+        .categories a:hover {
+            transform: translateX(-3%);
+        }
+
+    .categories p {
+        text-decoration: none;
+        color: black;
+        font-variant: small-caps;
+        text-align: center;
+        font-weight: bolder;
+        font-size: 2vh;
+        padding: 0;
+        max-width: 80%;
+        line-height: 3.5vh;
+        vertical-align: middle;
+    }
+
+    .categories a:hover {
+        text-decoration: none;
+    }
+
+.categorie_active {
+    animation: categorie-active 2s infinite;
+}
+
+    .categorie_active i, .categorie_active p {
+        animation: categorie-active2 2s infinite;
+    }
+
+
+@keyframes categorie-active {
+    0% {
+    }
+
+    50% {
+        color: white;
+        background: black;
+        border-color: white;
+    }
+
+    100% {
+    }
+}
+
+@keyframes categorie-active2 {
+    0% {
+    }
+
+    50% {
+        color: white;
+        background: none;
+    }
+
+    100% {
+    }
+}
+
+
+.smile {
+    top: -30%;
+}
+
+.smile-animation {
+    animation: participe-smile 3s ease 0.5s;
+}
+
+.default {
+    top: 50%;
+}
+
+.default-animation {
+    animation: participe-default 3s ease;
+}
+
+@keyframes participe-smile {
+    0% {
+        top: 0%;
+    }
+
+    20% {
+        top: 50%;
+    }
+
+    40% {
+        top: 40%
+    }
+
+    100% {
+        top: 150%;
+    }
+}
+
+@keyframes participe-default {
+    0% {
+        top: 0%;
+    }
+
+    20% {
+        top: 150%;
+        opacity: 0;
+    }
+
+    60% {
+        top: -30%;
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+    }
+}
+
+
+.card_active {
+    animation: card 5s ease-in infinite;
+    -webkit-animation: card 5s ease-in infinite;
+    -moz-animation: card 5s ease-in infinite;
+}
+
+@keyframes card {
+    0% {
+        box-shadow: inset 0px 0px 0px hotpink;
+    }
+
+    50% {
+        box-shadow: inset 0px 0px 20px 15px hotpink;
+    }
+
+    100% {
+        box-shadow: inset 0px 0px 0px hotpink;
+    }
+}

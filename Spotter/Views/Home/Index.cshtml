@@ -1,0 +1,33 @@
+﻿@model Spotter.Modele.Membre
+@{
+	ViewBag.Title = "Home Page";
+}
+@Styles.Render("~/css/inscription_style.css")
+<div class="signup-form">
+	@using (Html.BeginForm("Index", "Home/Connexion", FormMethod.Post))
+	{
+		<h2>Connexion</h2>
+		<p class="hint-text">Connectez-vous</p>
+		@Html.AntiForgeryToken()
+		<div class="form-group">
+			@Html.LabelFor(m => m.Username)
+			@Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control" } })
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Motdepasse)
+			<input class="form-control" type="password" name="Motdepasse" />
+		</div>
+		if (ViewBag.Erreur != "aucune")
+		{
+			<div class="erreur" style="color:red">
+				@ViewBag.Erreur
+			</div>
+		}
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Se connecter</button>
+		</div>
+	}
+	<div class="text-center">
+		Vous n'avez pas de compte? @Html.ActionLink("Créer un compte", "Inscription")
+	</div>
+</div>

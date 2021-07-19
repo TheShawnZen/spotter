@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5X09Z8wdXQs/qiVKvu0/IjZ81mDIqknRgIloFZYFshlWz0raE6MzWjDUleqyk4e9ypSpFiNZCveK9zwCzQwb2A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\maiso\\Documents\\Project\\spotter\\SpotterClasses\\SpotterClasses.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maiso\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\maiso\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

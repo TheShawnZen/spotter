@@ -1,0 +1,43 @@
+﻿.rejoindreActivite {    
+    position: fixed;
+    top: 10vh;
+    right: 30px;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    background: pink;
+    padding: 1vh;
+    border-radius: 25px;
+}
+#codeA {
+    text-align: left;
+}
+
+.rejoindreActivite i {
+    padding : 5px 3px;
+}
+h4 {
+    color: #fff;
+    font-weight: bold;
+}
+
+.rejoindreActivite a {
+    color: #555;
+    text-decoration: none;
+    display: flex;
+}
+.rejoindreActivite a:hover {
+    color:black;
+    text-decoration:none;
+}
+
+@media only screen and (max-width: 1370px) {
+    #rejA {
+        display: none;
+    }
+    .rejoindreActivite {
+        width: 30px;
+    }
+    .rejoindreActivite i {
+        padding :0;
+    }
+}

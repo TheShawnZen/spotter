@@ -1,0 +1,27 @@
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.deps.json
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.dll
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.pdb
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csprojAssemblyReference.cache
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfoInputs.cache
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfo.cs
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csproj.CoreCompileInputs.cache
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.dll
+C:\Users\maiso\Documents\Project\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.pdb
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.deps.json
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.dll
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.pdb
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csprojAssemblyReference.cache
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfoInputs.cache
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfo.cs
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csproj.CoreCompileInputs.cache
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.dll
+D:\OneDrive - Collège de Rosemont\1\1\2\dev graphique\spotterTest\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.pdb
+C:\Users\maiso\Desktop\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.deps.json
+C:\Users\maiso\Desktop\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.dll
+C:\Users\maiso\Desktop\spotter\SpotterClasses\bin\Debug\netstandard2.0\SpotterClasses.pdb
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csprojAssemblyReference.cache
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfoInputs.cache
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.AssemblyInfo.cs
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.csproj.CoreCompileInputs.cache
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.dll
+C:\Users\maiso\Desktop\spotter\SpotterClasses\obj\Debug\netstandard2.0\SpotterClasses.pdb

@@ -1,0 +1,255 @@
+﻿@model Spotter.Modele.Activite
+@{
+    ViewBag.Title = "GererActivites";
+}
+@Styles.Render("~/css/time-pick-dark.css")
+<script type="text/javascript" src="@Url.Content("~/js/time-pick.js")"></script>
+@using Spotter.Modele;
+@using Spotter.Services;
+@{List<Categorie> listeCat = CategorieServices.GetAll();}
+
+@{
+    if (ViewBag.Erreur != "aucune")
+    {
+        <div align="center">
+            <h2 style="color:red">@ViewBag.Erreur</h2>
+        </div>
+    }
+}
+<div class="container-fluid" style="width: 80%;">
+    <h2>Activités que j'ai organisées</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Catégorie</th>
+                    <th>Description</th>
+                    <th>Lieu</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Code d'accès</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (Activite act in ActiviteServices.GetByMemberId(((Membre)HttpContext.Current.Session["utilisateur"]).Id))
+                    {
+                        <tr>
+                            <td>@act.Nom</td>
+                            <td>@CategorieServices.GetById(act.Categorie_id).Nom</td>
+                            <td>@act.Dsc</td>
+                            <td>@act.Lieu</td>
+                            <td>@((act.Dateheure).Split(' ')[0])</td>
+                            <td>@((act.Dateheure).Split(' ')[1])</td>
+                            <td>
+                                @{
+                                    if (act.Motdepasse != "")
+                                    {
+                                        <div class="form-group">
+                                            <a href="#" style="font-size: 14px; padding: 5px 13px;" onclick="copie0('@act.Motdepasse')" type="button" class="btn-xs bouton"><i class="fas fa-clipboard"></i> Copier</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>Aucun code</div>
+                                    }
+                                }
+                            </td>
+                            <td><a href="ModifierActiviteGet?id=@act.Id">Modifier</a></td>
+                            <td><a href="GererParticipantsGet?idact=@act.Id">Gérer les participants</a></td>
+                            <td><a href="SupprimerActivite?id=@act.Id">Supprimer</a></td>
+                        </tr>
+                    }
+                    <tr align="center">
+                        <td colspan="10">
+                            <a href="#" type="button" class="btn-md"
+                               data-toggle="modal" data-target="#ajouterActivite">
+                                <i class="fas fa-plus-square"></i>
+                                Organiser une activité
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="modal fade" id="ajouterActivite" role="dialog" data-modal-type="type1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Nouvelle activité</h4>
+                    </div>
+                    @using (Html.BeginForm("AjouterActivite", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.Nom)
+                                @Html.EditorFor(a => a.Nom, new { htmlAttributes = new { @class = "form-control", @required = true, @placeholder = "Nom de l'activité" } })
+                            </div>
+                            <div class="form-group">
+                                <label for="categorieid">Categorie: </label>
+                                <select name="categorieid" class="form-control" id="categorieid">
+                                    <option selected value="">Veuillez choisir</option>
+                                    @{
+                                        foreach (Categorie cat in listeCat)
+                                        {
+                                            <option value="@cat.Id">@cat.Nom</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date: </label>
+                                <input type="date" class="form-control" id="date" name="date" placeholder="Date" />
+                            </div>
+                            <div class="form-group">
+                                <label for="heure">Heure: </label>
+                                <input type="text" class="form-control" id="heure" name="heure" placeholder="Heure:Minute" />
+                                <div id="temps"></div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.Lieu)
+                                @Html.EditorFor(a => a.Lieu, new { htmlAttributes = new { @class = "form-control", @required = true, @placeholder = "Lieu" } })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.Dsc)
+                                @Html.EditorFor(a => a.Dsc, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description" } })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.Motdepasse)<br />
+                                <div style="display: ruby;">
+                                    @Html.EditorFor(a => a.Motdepasse, new { htmlAttributes = new { @class = "form-control", id = "mdp0", Value = System.Guid.NewGuid() } })
+                                    <br /><a href="#" style="font-size:14px; padding: 8px 14px;" onclick="copie1()" type="button" class="btn-lg bouton"><i class="fas fa-clipboard"></i> Copier</a>
+                                </div>
+                                <br /><em style="font-size: 10px;">Pour rendre cette activité publique, supprimez le code d'accès.</em>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <button type="submit" class="btn bouton btn-lg btn-block">Ajouter</button>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            window.addEventListener("load", function () {
+                                tp.attach({
+                                    target: "heure",
+                                    wrap: "temps"
+                                });
+                            });
+                        </script>
+                    }
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <h2>Activités dont je suis membre</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Description</th>
+                        <th>Lieu</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Code d'accès</th>
+                        <th colspan="3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (Activite act in ActiviteServices.GetByParticipantId(((Membre)HttpContext.Current.Session["utilisateur"]).Id))
+                        {
+                            <tr>
+                                <td>@act.Nom</td>
+                                <td>@CategorieServices.GetById(act.Categorie_id).Nom</td>
+                                <td>@act.Dsc</td>
+                                <td>@act.Lieu</td>
+                                <td>@((act.Dateheure).Split(' ')[0])</td>
+                                <td>@((act.Dateheure).Split(' ')[1])</td>
+                                <td>
+                                    @{
+                                        if (act.Motdepasse != "")
+                                        {
+                                            <div class="form-group">
+                                                <a href="#" style="font-size: 14px; padding: 5px 13px;" onclick="copie0('@act.Motdepasse')" type="button" class="btn-xs bouton"><i class="fas fa-clipboard"></i> Copier</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>Aucun code</div>
+                                        }
+                                    }
+                                </td>
+                                <td><a href="SupprimerActivite?id=@act.Id">Annuler ma participation</a></td>
+                            </tr>
+                        }
+                        <tr align="center">
+                            <td colspan="10">
+                                <a href="#" type="button" class="btn-md"
+                                   data-toggle="modal" data-target="#rejoindreActivite">
+                                    <i class="fas fa-plus-square"></i>
+                                    Rejoindre une activité
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="modal fade" id="rejoindreActivite" role="dialog" data-modal-type="type1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Rejoindre une activité privée</h4>
+                        </div>
+                        @using (Html.BeginForm("RejoindreActivite", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="modal-body" style="display: none;">
+                                <div class="form-group">
+                                    <label for="page">Page</label>
+                                    <input type="text" name="page" value="GererActivites" />
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(a => a.Motdepasse)
+                                    @Html.EditorFor(a => a.Motdepasse, new { htmlAttributes = new { @class = "form-control", @placeholder = "Code d'accès" } })
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <button type="submit" class="btn bouton btn-md btn-block">Rejoindre</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const copie0 = (texte => {
+                navigator.clipboard.writeText(texte).then(function () {
+                    console.log('Copié ', texte, ' avec succès!');
+                }, function (err) {
+                    console.error('Erreur en copiant: ', err);
+                });
+            });
+            const copie1 = (() => {
+                navigator.clipboard.writeText($("#mdp0").val()).then(function () {
+                    console.log('Copié ', $("#mdp0").val(), ' avec succès!');
+                }, function (err) {
+                    console.error('Erreur en copiant: ', err);
+                });
+            });
+        </script>
+    </div>
+</div>
